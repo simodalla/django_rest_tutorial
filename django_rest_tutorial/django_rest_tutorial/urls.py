@@ -7,8 +7,8 @@ from quickstart import views
 
 
 router = routers.DefaultRouter()
-router.register(r'users', views.UserSerialize)
-router.register(r'groups', views.GroupSerialize)
+router.register(r'users', views.UserViewSet)
+router.register(r'groups', views.GroupViewSet)
 
 urlpatterns = patterns('',
     # Examples:
