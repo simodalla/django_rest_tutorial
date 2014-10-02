@@ -21,14 +21,14 @@ class JSONResponse(HttpResponse):
 @csrf_exempt
 def snippet_list(request):
     """
-    List alla code snippets, or create a new snippet.
+    List all code snippets, or create a new snippet.
     """
     if request.method == 'GET':
         snippets = Snippet.objects.all()
         serializer = SnippetSerializer(snippets, many=True)
         return JSONResponse(serializer.data)
 
-    if request.method == 'POST':
+    elif request.method == 'POST':
         data = JSONParser().parse(request)
         serializer = SnippetSerializer(data=data)
         if serializer.is_valid():
