@@ -35,10 +35,14 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
 
 class SnippetViewSet(viewsets.ModelViewSet):
     """
+    aaa
+
     This viewset automatically provides 'list', 'create', 'retrive',
     'update' and 'destroy' actions.
 
     Additionally we also provide an extra 'highlight' action
+
+    bbb
     """
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer

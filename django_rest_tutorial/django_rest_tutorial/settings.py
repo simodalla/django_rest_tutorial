@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'debug_toolbar',
     'rest_framework',
     'snippets',
 )
@@ -84,7 +85,14 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+#### CUSTOM SETTINGS ######################################################
+
 REST_FRAMEWORK = {
-    # 'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAdminUser',),
+    # 'DEFAULT_PERMISSION_CLASSES': (
+    #     'rest_framework.permissions.IsAdminUser',),
     'PAGINATE_BY': 10
 }
+
+TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'templates'),)
+
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'assets'),)

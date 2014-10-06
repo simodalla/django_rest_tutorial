@@ -1,0 +1,20 @@
+{% extends "rest_framework/base.html" %}
+{% load staticfiles %}
+
+{# Override this template in your own templates directory to customize #}
+
+{% block title %}OpenPA - OpenData{% endblock %}
+
+{% block body %}
+    {{ block.super }}
+{% endblock %}
+
+{#{% block bootstrap_theme %}#}
+{#    <link rel="stylesheet" href="http://bootswatch.com/flatly/bootstrap.min.css" type="text/css">#}
+{#{% endblock %}#}
+
+{% block branding %}
+    <a class='brand' rel="nofollow" href='http://www.django-rest-framework.org'>
+        OpenPa - Open Data
+    </a>
+{% endblock %}
