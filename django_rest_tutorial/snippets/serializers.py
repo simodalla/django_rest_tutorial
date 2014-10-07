@@ -59,5 +59,3 @@ class SnippetSerializer(serializers.HyperlinkedModelSerializer):
 #
 #         # Create new instance
 #         return Snippet(**attrs)
-
-

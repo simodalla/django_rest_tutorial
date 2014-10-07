@@ -17,12 +17,52 @@ from snippets.permissions import IsOwnerOrReadOnly
 from snippets.serializers import SnippetSerializer, UserSerializer
 
 
-@api_view(('GET',))
-def api_root(request, format=None):
-    return Response({
-        'users': reverse('user-list', request=request, format=format),
-        'snippets': reverse('snippet-list', request=request, format=format)
-    })
+from django.utils.safestring import mark_safe
+from rest_framework.views import get_view_description, get_view_name
+
+
+def my_get_view_name(view_cls, suffix=None):
+    """
+    Given a view class, return a textual name to represent the view.
+    This name is used in the browsable API, and in OPTIONS responses.
+
+    This function is the default for the `VIEW_NAME_FUNCTION` setting.
+    """
+    print("******* my_get_view_name")
+    print(view_cls, view_cls.__name__, suffix)
+    if view_cls.__name__ == 'APIRoot':
+        return "Radice API"
+    name = get_view_name(view_cls, suffix=suffix)
+    print(name)
+    print("******* END my_get_view_name")
+    return name
+
+
+def my_get_view_description(view_cls, html=False):
+    """
+    Given a view class, return a textual description to represent the view.
+    This name is used in the browsable API, and in OPTIONS responses.
+
+    This function is the default for the `VIEW_DESCRIPTION_FUNCTION` setting.
+    """
+    print("######## my_get_view_description")
+    print(view_cls, view_cls.__name__, html)
+    if view_cls.__name__ == 'APIRoot':
+        description = mark_safe("<p>Radice API</p>")
+    else:
+        description = get_view_description(view_cls, html=html)
+    print(type(description), description)
+    print("######## END my_get_view_description")
+    return description
+
+
+
+# @api_view(('GET',))
+# def api_root(request, format=None):
+#     return Response({
+#         'users': reverse('user-list', request=request, format=format),
+#         'snippets': reverse('snippet-list', request=request, format=format)
+#     })
 
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):

@@ -86,12 +86,20 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 #### CUSTOM SETTINGS ######################################################
-
 REST_FRAMEWORK = {
     # 'DEFAULT_PERMISSION_CLASSES': (
     #     'rest_framework.permissions.IsAdminUser',),
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+        'rest_framework.renderers.XMLRenderer',
+        'rest_framework_csv.renderers.CSVRenderer',
+    ),
+    'VIEW_DESCRIPTION_FUNCTION': 'snippets.views.my_get_view_description',
+    'VIEW_NAME_FUNCTION': 'snippets.views.my_get_view_name',
     'PAGINATE_BY': 10
 }
+
 
 TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'templates'),)
 
