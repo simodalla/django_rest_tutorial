@@ -95,9 +95,10 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.XMLRenderer',
         'rest_framework_csv.renderers.CSVRenderer',
     ),
-    'VIEW_DESCRIPTION_FUNCTION': 'snippets.views.my_get_view_description',
-    'VIEW_NAME_FUNCTION': 'snippets.views.my_get_view_name',
-    'PAGINATE_BY': 10
+    # 'VIEW_DESCRIPTION_FUNCTION': 'snippets.views.my_get_view_description',
+    # 'VIEW_NAME_FUNCTION': 'snippets.views.my_get_view_name',
+    'PAGINATE_BY': 10,
+    'DEFAULT_FILTER_BACKENDS': ('rest_framework.filters.DjangoFilterBackend',)
 }
 
 

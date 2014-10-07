@@ -21,39 +21,39 @@ from django.utils.safestring import mark_safe
 from rest_framework.views import get_view_description, get_view_name
 
 
-def my_get_view_name(view_cls, suffix=None):
-    """
-    Given a view class, return a textual name to represent the view.
-    This name is used in the browsable API, and in OPTIONS responses.
-
-    This function is the default for the `VIEW_NAME_FUNCTION` setting.
-    """
-    print("******* my_get_view_name")
-    print(view_cls, view_cls.__name__, suffix)
-    if view_cls.__name__ == 'APIRoot':
-        return "Radice API"
-    name = get_view_name(view_cls, suffix=suffix)
-    print(name)
-    print("******* END my_get_view_name")
-    return name
-
-
-def my_get_view_description(view_cls, html=False):
-    """
-    Given a view class, return a textual description to represent the view.
-    This name is used in the browsable API, and in OPTIONS responses.
-
-    This function is the default for the `VIEW_DESCRIPTION_FUNCTION` setting.
-    """
-    print("######## my_get_view_description")
-    print(view_cls, view_cls.__name__, html)
-    if view_cls.__name__ == 'APIRoot':
-        description = mark_safe("<p>Radice API</p>")
-    else:
-        description = get_view_description(view_cls, html=html)
-    print(type(description), description)
-    print("######## END my_get_view_description")
-    return description
+# def my_get_view_name(view_cls, suffix=None):
+#     """
+#     Given a view class, return a textual name to represent the view.
+#     This name is used in the browsable API, and in OPTIONS responses.
+#
+#     This function is the default for the `VIEW_NAME_FUNCTION` setting.
+#     """
+#     print("******* my_get_view_name")
+#     print(view_cls, view_cls.__name__, suffix)
+#     if view_cls.__name__ == 'APIRoot':
+#         return "Radice API"
+#     name = get_view_name(view_cls, suffix=suffix)
+#     print(name)
+#     print("******* END my_get_view_name")
+#     return name
+#
+#
+# def my_get_view_description(view_cls, html=False):
+#     """
+#     Given a view class, return a textual description to represent the view.
+#     This name is used in the browsable API, and in OPTIONS responses.
+#
+#     This function is the default for the `VIEW_DESCRIPTION_FUNCTION` setting.
+#     """
+#     print("######## my_get_view_description")
+#     print(view_cls, view_cls.__name__, html)
+#     if view_cls.__name__ == 'APIRoot':
+#         description = mark_safe("<p>Radice API</p>")
+#     else:
+#         description = get_view_description(view_cls, html=html)
+#     print(type(description), description)
+#     print("######## END my_get_view_description")
+#     return description
 
 
 
@@ -71,6 +71,7 @@ class UserViewSet(viewsets.ReadOnlyModelViewSet):
     """
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    filter_fields = ('username', )
 
 
 class SnippetViewSet(viewsets.ModelViewSet):
@@ -86,8 +87,9 @@ class SnippetViewSet(viewsets.ModelViewSet):
     """
     queryset = Snippet.objects.all()
     serializer_class = SnippetSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
-                          IsOwnerOrReadOnly,)
+    # permission_classes = (permissions.IsAuthenticatedOrReadOnly,
+    #                       IsOwnerOrReadOnly,)
+    # filter_fields = ('categoria', 'categoria__titulo',)
 
     @detail_route(renderer_classes=[renderers.StaticHTMLRenderer])
     def highlight(self, request, *args, **kwars):
